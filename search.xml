@@ -20,7 +20,7 @@
   </entry>
   <entry>
     <title>js事件冒泡</title>
-    <url>/2020/08/17/js%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1/</url>
+    <url>/2020/03/17/js%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1/</url>
     <content><![CDATA[<p>气泡会从水底向上移动到水面，这就是冒泡。Javascript中的冒泡机制就是将事件当作气泡，由内而外冒出去。</p>
 <h2 id="1、事件的发生过程"><a href="#1、事件的发生过程" class="headerlink" title="1、事件的发生过程"></a>1、事件的发生过程</h2><p>一个事件从发生到执行有三个过程：</p>
 <p>1.事件的捕获阶段：从外到内</p>
