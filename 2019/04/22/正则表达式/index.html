@@ -3,23 +3,25 @@
 <head>
   <meta charset="utf-8" />
   
-  <title>zsy的博客</title>
+  <title>正则表达式 | zsy的博客</title>
   <meta name="author" content="John Doe" />
 
+  
+  <meta name="description" content="1. 正则表达式简介1.1 什么是正则表达式正则表达式：用于匹配规律规则的表达式，正则表达式最初是科学家对人类神经系统的工作原理的早期研究，现在在编程语言中有广泛的应用。正则表通常被用来检索、替换那些符合某个模式(规则)的文本。正则表达式是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、" />
   
 
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-  
+  <meta property="og:title" content="正则表达式" />
   <meta property="og:site_name" content="zsy的博客" />
 
   
   
 
   
-    <meta property="og:image" content="" />
+    <meta property="og:image" content="/2019/04/22/正则表达式/reg.jpg" />
   
 
   
@@ -55,83 +57,7 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2020-03-17T10:22:49.000Z"><a href="/2020/03/17/js事件冒泡/">2020-03-17</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2020/03/17/js事件冒泡/">js事件冒泡</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>气泡会从水底向上移动到水面，这就是冒泡。Javascript中的冒泡机制就是将事件当作气泡，由内而外冒出去。</p>
-<h2 id="1、事件的发生过程"><a href="#1、事件的发生过程" class="headerlink" title="1、事件的发生过程"></a>1、事件的发生过程</h2><p>一个事件从发生到执行有三个过程：</p>
-<p>1.事件的捕获阶段：从外到内</p>
-<p>2.事件的目标阶段：目标元素本身</p>
-<p>3.事件的冒泡阶段：从内向外</p>
-<p>为了解释这个问题，我们来举个例子：</p>
-<p><img src="C:/Users/郑舒耀/Desktop/学习资料/_posts/js事件冒泡/1.png" alt="事件触发"></p>
-<p>当我们点击div2时，首先会进入事件的捕获阶段：</p>
-<p>先由外到里来找事件的真正触发者，操作系统–&gt;对应应用程序–&gt;window–&gt;body–&gt;div1–&gt;div2；</p>
-<p>再到事件的第二阶段：确定事件的真正触发者是div2；</p>
-<p>最后来到事件的冒泡阶段：由内向外传递事件（顺序与捕获阶段相反）和真正触发者对象（后文简称为 触发对象），执行div2中的onclick事件后，在向他的父亲元素传递事件和对象，若父亲元素存在onclick事件则执行；再继续向上传递事件和对象，以此内推知道无父亲元素为止。</p>
-<p>注：关于事件的捕获阶段和事件的冒泡阶段可以用以下函数来模拟</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 目标元素. addEventListener(操作,绑定的函数,boolean);</span><br><span class="line">element.addEventListener(&#39;click&#39;,function()&#123;&#125;,true);  &#x2F;&#x2F;捕获阶段</span><br><span class="line">element.addEventListener(&#39;click&#39;,function()&#123;&#125;,false); &#x2F;&#x2F;冒泡阶段</span><br></pre></td></tr></table></figure>
-
-<p>要切实说明这个问题，我们来看一个例子：</p>
-<p>css代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#red &#123;</span><br><span class="line">    width: 400px;</span><br><span class="line">    height: 400px;</span><br><span class="line">    background-color: red;</span><br><span class="line">&#125;</span><br><span class="line">#yellow &#123;</span><br><span class="line">    width: 300px;</span><br><span class="line">    height: 300px;</span><br><span class="line">    background-color: yellow;</span><br><span class="line">&#125;</span><br><span class="line">#blue &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 200px;</span><br><span class="line">    background-color: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>HTML代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;red&quot;&gt;</span><br><span class="line">    &lt;div id&#x3D;&quot;yellow&quot;&gt;</span><br><span class="line">        &lt;div id&#x3D;&quot;blue&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-
-<p>Javascript代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var red &#x3D; GEBID$(&#39;red&#39;);</span><br><span class="line">var yellow &#x3D; GEBID$(&#39;yellow&#39;);</span><br><span class="line">var blue &#x3D; GEBID$(&#39;blue&#39;);</span><br><span class="line"></span><br><span class="line">blue.onclick &#x3D; function(e)&#123;  &#x2F;&#x2F;这里的 e 便是触发事件（点击事件）</span><br><span class="line">    console.log(&#39;蓝色&#39;);</span><br><span class="line">    console.log(e.target);  &#x2F;&#x2F;e.target  触发事件的对象元素（触发对象）</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;*yellow.onclick &#x3D; function(e)&#123;</span><br><span class="line">    console.log(&#39;黄色&#39;);</span><br><span class="line">    console.log(e.target);</span><br><span class="line">&#125;*&#x2F;</span><br><span class="line"></span><br><span class="line">red.onclick &#x3D; function(e)&#123;</span><br><span class="line">    console.log(&#39;红色&#39;);</span><br><span class="line">    console.log(e.target);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="C:/Users/郑舒耀/Desktop/学习资料/_posts/js事件冒泡/2.png" alt="界面预览"></p>
-<p><a target="_blank" rel="noopener" href="https://howlcn1997.github.io/2019/09/27/%E6%B5%85%E6%9E%90Javascript%E4%B8%AD%E7%9A%84%E5%86%92%E6%B3%A1%E6%9C%BA%E5%88%B6/%E7%95%8C%E9%9D%A2%E9%A2%84%E8%A7%88.png">界面预览</a></p>
-<p>当我们点击blue时，bule的onclick被触发，查看blue中是否有onclik事件，若有则执行输出语句，执行结束后会根据冒泡机制向上一层传递事件和触发对象至yellow，但此时yellow中并未绑定onclick事件，所以不执行输出语句，继续向上传递；到red后，由于red绑定了onclick事件，则执行输出语句；在传递给body……控制台结果如下：</p>
-<p><img src="C:/Users/郑舒耀/Desktop/学习资料/_posts/js事件冒泡/3.png" alt="执行结果"></p>
-<p>我们发现：虽然red也执行了它自身的事件函数，但是触发对象却仍然是blue。这是因为虽然我们没有点击red，但是我们点击了blue，而blue会将这一点击信号通过冒泡机制向上传递，传递过程中只要遇到绑定有onclick事件的元素便会触发其事件函数，但这沿路走过的一直都是我们最初所点击的那位始作俑者。</p>
-<p><strong>值得注意的是：</strong></p>
-<p>1.当我们点击blue而触发事件，并引发冒泡机制后，yellow和red所执行的 <strong>element.onclick = function(e){}</strong> 中的e所代表的事件是同一个事件，是由blue通过冒泡机制传递过来的。</p>
-<p>2.只要没有阻止冒泡机制或者说冒泡机制生效，无论当前元素是否绑定onclick事件，它都会向上传递点击事件。</p>
-<h2 id="2、如何阻止冒泡机制"><a href="#2、如何阻止冒泡机制" class="headerlink" title="2、如何阻止冒泡机制"></a>2、如何阻止冒泡机制</h2><p>当我们需要点击blue而不触发其祖先元素的事件时，我们只需要在blue的事件函数中加入以下代码即可（已做了兼容性处理）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function stopBubble(e) &#123; </span><br><span class="line">&#x2F;&#x2F;如果提供了事件对象，则这是一个非IE浏览器 </span><br><span class="line">if ( e &amp;&amp; e.stopPropagation ) </span><br><span class="line">    &#x2F;&#x2F;因此它支持W3C的stopPropagation()方法 </span><br><span class="line">    e.stopPropagation(); </span><br><span class="line">else </span><br><span class="line">    &#x2F;&#x2F;否则，我们需要使用IE的方式来取消事件冒泡 </span><br><span class="line">    window.event.cancelBubble &#x3D; true; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">blue.onclick &#x3D; function(e)&#123; </span><br><span class="line">    console.log(&#39;蓝色&#39;);</span><br><span class="line">    console.log(e.target);</span><br><span class="line">    function stopBubble(e); &#x2F;&#x2F;断开冒泡机制链  使得事件不会继续向上传递</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    
-    <footer>
-        <div class="alignright">
-          
-          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
-        </div>
-        
-        
-        <!-- partial('post/share') -->
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-  <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
@@ -141,7 +67,7 @@
       
       
   
-    <h1 class="title"><a href="/2019/04/22/正则表达式/">正则表达式</a></h1>
+    <h1 class="title">正则表达式</h1>
   
 
     </header>
@@ -337,12 +263,6 @@
 
 
 
-
-
-
-<nav id="pagination">
-  
-</nav>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
