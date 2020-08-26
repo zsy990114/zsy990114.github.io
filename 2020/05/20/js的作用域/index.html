@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>js的作用域 | zsy的博客</title>
+  <meta name="author" content="John Doe" />
+
+  
+  <meta name="description" content="一、作用域1作用域（scope），程序设计概念，通常来说，一段程序代码中所用到的名字并不总是有效&amp;#x2F;可用的，而限定这个名字的可用性的代码范围就是这个名字的作用域。
+
+作用域的使用提高了程序逻辑的局部性，增强程序的可靠性，减少名字冲突。
+1.全局作用域（全局变量）全局变量，原理就是将变量挂载到" />
+  
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <meta property="og:title" content="js的作用域" />
+  <meta property="og:site_name" content="zsy的博客" />
+
+  
+  
+
+  
+    <meta property="og:image" content="/2018/05/20/js的作用域/zuoyongyu.jpg" />
+  
+
+  
+  <link href="/css/images/favicon.ico" rel="icon" />
+  
+
+  <link rel="alternate" href="/atom.xml" title="zsy的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">zsy的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-05-20T08:25:55.000Z"><a href="/2020/05/20/js的作用域/">2020-05-20</a></time>
+      
+      
+  
+    <h1 class="title">js的作用域</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="一、作用域"><a href="#一、作用域" class="headerlink" title="一、作用域"></a>一、作用域</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">作用域（scope），程序设计概念，通常来说，一段程序代码中所用到的名字并不总是有效&#x2F;可用的，而限定这个名字的可用性的代码范围就是这个名字的作用域。</span><br></pre></td></tr></table></figure>
+
+<p>作用域的使用提高了程序逻辑的局部性，增强程序的可靠性，减少名字冲突。</p>
+<h3 id="1-全局作用域（全局变量）"><a href="#1-全局作用域（全局变量）" class="headerlink" title="1.全局作用域（全局变量）"></a>1.全局作用域（全局变量）</h3><p><strong>全局变量，原理就是将变量挂载到window对象中.</strong></p>
+<p><strong>全局变量拥有全局的作用域，可在任意地方被调用</strong></p>
+<p>全局变量有两种声明方式</p>
+<h3 id="（1）函数外部"><a href="#（1）函数外部" class="headerlink" title="（1）函数外部"></a>（1）函数外部</h3><p>(写在函数外面的都是全局变量)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var num &#x3D; 15; &#x2F;&#x2F;全局变量</span><br><span class="line">        function f() &#123;</span><br><span class="line">        var num &#x3D; 10; &#x2F;&#x2F;不是全局变量</span><br><span class="line">            function f2()&#123;</span><br><span class="line">               &#x2F;*----*&#x2F; </span><br><span class="line">            &#125;</span><br><span class="line">            f2();</span><br><span class="line">        &#125;</span><br><span class="line">    f();</span><br><span class="line">    console.log(num); &#x2F;&#x2F;  15</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）函数内部"><a href="#（2）函数内部" class="headerlink" title="（2）函数内部"></a>（2）函数内部</h3><p>(不加var的变量声明，隐式全局变量)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    function f() &#123;</span><br><span class="line">        num &#x3D; 10; &#x2F;&#x2F;隐式全局变量</span><br><span class="line">    &#125;</span><br><span class="line">    f();</span><br><span class="line">    console.log(num); &#x2F;&#x2F; 10</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="全局变量与隐式全局变量的区别"><a href="#全局变量与隐式全局变量的区别" class="headerlink" title="全局变量与隐式全局变量的区别"></a>全局变量与隐式全局变量的区别</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">隐式全局变量可以通过delete关键字来删除，全局变量不可以</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;全局变量不可被delete</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var a &#x3D; 2; &#x2F;&#x2F;全局变量</span><br><span class="line">    function f()&#123;</span><br><span class="line">        &#x2F;&#x2F;****</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(a); &#x2F;&#x2F;  2</span><br><span class="line">    delete a;</span><br><span class="line">    console.log(a); &#x2F;&#x2F;  2</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;隐式全局变量被delete</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    function f()&#123;</span><br><span class="line">        a &#x3D; 2; &#x2F;&#x2F;隐式全局变量</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(a); &#x2F;&#x2F;  2</span><br><span class="line">    delete a;</span><br><span class="line">    console.log(a); &#x2F;&#x2F;  not defined (已被删除)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-局部作用域-局部变量"><a href="#2-局部作用域-局部变量" class="headerlink" title="2.局部作用域(局部变量)"></a>2.局部作用域(局部变量)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">局部变量：写在函数体里面的变量</span><br><span class="line"></span><br><span class="line">局部变量只可以在当前函数内部使用</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    function f() &#123;</span><br><span class="line">        var num &#x3D; 10; &#x2F;&#x2F;局部变量</span><br><span class="line">        function f2()&#123;</span><br><span class="line">            console.log(num); &#x2F;&#x2F; 10</span><br><span class="line">        &#125;</span><br><span class="line">        f2();</span><br><span class="line">    &#125;</span><br><span class="line">    f();</span><br><span class="line">    console.log(num); &#x2F;&#x2F;  not defined</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、作用域链"><a href="#二、作用域链" class="headerlink" title="二、作用域链"></a>二、作用域链</h2><p>作用域链简而言之就是，调用变量时，若当前作用域内没有该变量时就向它的上一级作用域去寻找。</p>
+<p>Javascript用的是词法作用域（静态作用域）</p>
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;    &#x2F;* 0级作用域 *&#x2F;</span><br><span class="line">var a &#x3D; 1;</span><br><span class="line">function aa()&#123;    &#x2F;* 1级作用域 *&#x2F;</span><br><span class="line">    &#x2F;&#x2F;var a &#x3D; 2;</span><br><span class="line">    function bb()&#123;  &#x2F;* 2级作用域 *&#x2F;</span><br><span class="line">        &#x2F;&#x2F;var a &#x3D; 3;</span><br><span class="line">        console.log(a);  &#x2F;&#x2F; 1</span><br><span class="line">    &#125;</span><br><span class="line">    bb();</span><br><span class="line">&#125;</span><br><span class="line">aa();</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>作用过程：</p>
+<ol>
+<li>当运行到console.log(a)时，会在当前作用域（2级作用域）内寻找是否有a可用；</li>
+<li>若有直接使用，否则向上一级作用域（1级作用域）去寻找；</li>
+<li>此时来到1级作用域，若此时有a可用则用，否则继续向上一级寻找，直到到达0级作用域；</li>
+<li>此时来到0级作用域，若此时有a可用则用，否则报错；</li>
+</ol>
+<p><img src="C:/Users/郑舒耀/Desktop/学习资料/_posts/js的作用域/1.jpg" alt="作用域链"></p>
+<p><strong>值得注意的是：作用域链的始发点与函数的调用位置无关，而与函数的声明位置有关</strong> </p>
+<p>例子如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var value &#x3D; 1;</span><br><span class="line">    function foo() &#123;</span><br><span class="line">        console.log(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function bar() &#123;</span><br><span class="line">        var value &#x3D; 2;</span><br><span class="line">        foo();</span><br><span class="line">    &#125;</span><br><span class="line">    bar();</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此时的打印结果为1，而不是foo函数调用所在作用域的value = 2；</p>
+<p>这里的1是foo函数声明所在的作用域中的value = 1；</p>
+<p>## 三、预解析</p>
+<p>当浏览器执行Javascript代码时，为了提高执行效率会在代码解释执行前进行预解析处理。</p>
+<p>预解析处理规则：</p>
+<p>\1. 变量提升 仅仅将变量声明提升到当前作用域的最上面，不包括变量的赋值</p>
+<p>\2. 函数提升 将函数的声明提升到当前作用域的最上面，不包括函数的调用 </p>
+<p><strong>函数的声明会提前到变量声明之前</strong></p>
+<h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    console.log(a); &#x2F;&#x2F;undefined</span><br><span class="line">    var a &#x3D; 10;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码结果打印为undefined,而不是10，这是为什么呢？</p>
+<p>我们来看看与解析之后的结果，</p>
+<p>预解析为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var a</span><br><span class="line">    console.log(a);</span><br><span class="line">    a &#x3D; 10;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>由于变量声明被提升到作用域最前端，而赋值没有被提升，导致执行console.log(a);时 a还未被赋值。</p>
+<h3 id="函数提升"><a href="#函数提升" class="headerlink" title="函数提升"></a>函数提升</h3><p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    f1();</span><br><span class="line">    function f1() &#123;</span><br><span class="line">        &#x2F;*-----*&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>被解析为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    function f1() &#123;</span><br><span class="line">        &#x2F;*-----*&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">    f1();</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数的声明会提前到变量声明之前"><a href="#函数的声明会提前到变量声明之前" class="headerlink" title="函数的声明会提前到变量声明之前"></a>函数的声明会提前到变量声明之前</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">函数提升和变量提升同时发生时，函数的声明会提前到变量声明之前。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var a &#x3D; 3;</span><br><span class="line">    function a()&#123;</span><br><span class="line">        console.log(10);</span><br><span class="line">    &#125;   </span><br><span class="line">    console.log(a);</span><br><span class="line">    a();</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>被解析为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    function a()&#123;</span><br><span class="line">        console.log(10);</span><br><span class="line">    &#125;</span><br><span class="line">    var a;</span><br><span class="line">    a &#x3D; 3</span><br><span class="line">    console.log(a);</span><br><span class="line">    a(); &#x2F;&#x2F;not function  因为此时a为变量而不是函数</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>值得注意的是：</strong></p>
+<p>1.函数是可以被打印的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    function a()&#123;</span><br><span class="line">    &#x2F;*----*&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">console.log(a); &#x2F;&#x2F;打印函数a</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>2.变量a的赋值可以被普通类型和函数互相取代</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var a；</span><br><span class="line">    a &#x3D; function()&#123;</span><br><span class="line">        &#x2F;*----*&#x2F;</span><br><span class="line">        &#125;</span><br><span class="line">    console.log(a); &#x2F;&#x2F;打印函数a</span><br><span class="line">    a &#x3D; 1;</span><br><span class="line">    console.log(a); &#x2F;&#x2F; 1；</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="匿名函数的申明不遵循预解析规则"><a href="#匿名函数的申明不遵循预解析规则" class="headerlink" title="匿名函数的申明不遵循预解析规则"></a>匿名函数的申明不遵循预解析规则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    f();  &#x2F;&#x2F;报错</span><br><span class="line">    var f &#x3D; function()&#123;</span><br><span class="line">        &#x2F;*----*&#x2F;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>因为解析前后代码相同 执行 <strong>f()</strong> 时，f未被声明为函数类型。</p>
+<h3 id="隐式全局变量的注意点"><a href="#隐式全局变量的注意点" class="headerlink" title="隐式全局变量的注意点"></a>隐式全局变量的注意点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    f();</span><br><span class="line">    console.log(a);  &#x2F;&#x2F;undefined</span><br><span class="line">    console.log(b);  &#x2F;&#x2F;9</span><br><span class="line">    function f() &#123;</span><br><span class="line">      var a &#x3D; b &#x3D; c &#x3D; 9;</span><br><span class="line">      console.log(a); &#x2F;&#x2F;9</span><br><span class="line">      console.log(b); &#x2F;&#x2F;9</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>被解析为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    function f() &#123;</span><br><span class="line">      var a;  &#x2F;&#x2F;局部变量</span><br><span class="line">      a &#x3D; 9;  </span><br><span class="line">      b &#x3D; 9;  &#x2F;&#x2F;隐式全局变量</span><br><span class="line">      console.log(a);  &#x2F;&#x2F;9</span><br><span class="line">      console.log(b);  &#x2F;&#x2F;9</span><br><span class="line">    &#125;</span><br><span class="line">    f();</span><br><span class="line">    console.log(b);  &#x2F;&#x2F;9</span><br><span class="line">    console.log(a);  &#x2F;&#x2F;undefined   因为a是局部变量</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    <footer>
+        <div class="alignright">
+          
+          <a href='javascript:void(0)' class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
+        </div>
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/javascript/">javascript</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/05/20/js的作用域/">js的作用域</a>
+      </li>
+    
+      <li>
+        <a href="/2020/03/17/js事件冒泡/">js事件冒泡</a>
+      </li>
+    
+      <li>
+        <a href="/2019/11/12/微信公众号开发/">微信公众号开发</a>
+      </li>
+    
+      <li>
+        <a href="/2019/09/14/函数原型/">函数原型</a>
+      </li>
+    
+      <li>
+        <a href="/2019/06/22/正则表达式/">正则表达式</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2020 John Doe
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="clearfix"></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<div id='bg'></div>
+</body>
+</html>
